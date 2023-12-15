@@ -279,7 +279,7 @@ function init(){
             visible: true
           })
           map.addLayer(geotiffFile);
-          addLayerND(selectedFiles[0]);        
+          addLayerND(selectedFiles[0]);  
         }
         else if(fileExt === 'shp'){
           fetch(tmppath)
@@ -344,22 +344,41 @@ function init(){
         }
         
     });
-
     
     // Zoom to Layer
     $(document).ready(function(){
 
       $(document).on('click','.zoomLayer',function(e){
-        // console.log(e.target.previousElementSibling.innerHTML)
         var namelayer = e.target.previousElementSibling.innerHTML
-        map.getLayers().forEach((layer)=>{
-          // console.log(layer.get('title'));
-          if(namelayer === layer.get('title')){
-            // console.log(ol.extent.getCenter(layer.getSource().getExtent()))
-            var layerCenter = ol.extent.getCenter(layer.getSource().getExtent())
-            map.getView().animate({center: layerCenter, duration:1000,zoom:5});
-          }
-        })
+        const ext = namelayer.split('.').pop();
+        if(ext === 'tiff' || ext === 'tif'){
+          map.getLayers().forEach((layer)=>{
+            if(namelayer === layer.get('title')){
+              // Zoom to Image Extent
+              const tiffUrl = layer.getSource().getUrl();
+              GeoTIFF.fromUrl(tiffUrl)
+                .then(tiff => tiff.getImage()
+                  .then(image => {
+                    var bbox = image.getBoundingBox();
+                    map.getView().fit(bbox ,{ duration: 1000 });
+                  }))
+              
+            }
+          })
+        }
+        else{
+          map.getLayers().forEach((layer)=>{
+            if(namelayer === layer.get('title')){
+              // Zoom to Center
+              // var layerCenter = ol.extent.getCenter(layer.getSource().getExtent())
+              // map.getView().animate({center: layerCenter, duration:1000,zoom:5});
+
+              // Zoom to Layer Extent
+              map.getView().fit(layer.getSource().getExtent() ,{ duration: 1000 });
+            }
+          })
+        }
+        
       })
     })
 
