@@ -75,7 +75,7 @@ p{
 .main .sidebar .inputfile + label {
     font-size: 2rem;
 	padding: 1rem 2rem;
-	margin: 2rem;
+	margin: 1rem 2rem 0rem 2rem  ;
 	width: calc(100% - 4rem );
 	border-radius: 1rem;
     font-weight: 700;
@@ -92,7 +92,7 @@ p{
 	background-color: var(--secondcolor);
 }
 .main .sidebar .top{
-	height: 15rem;
+	height:15rem;
 }
 .main .sidebar h3{
 	font-size: 2rem;
@@ -122,11 +122,11 @@ p{
 	font-size: 1.5rem;
 	font-weight: 400;
 }
-.main .sidebar .layerList .layer a{
+.main .sidebar .layerList .layer .zoomLayer{
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
-	right: 1rem;
+	right: 3rem;
 	color: #17232e;
 	font-size: 1.3rem;
 	background-color: #d9d9d9;
@@ -136,8 +136,59 @@ p{
 	text-align: center;
 	transition: background-color .2s;
 }
-.main .sidebar .layerList .layer a:hover{
+.main .sidebar .layerList .layer .removeLayer{
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	right: -1rem;
+	color: white;
+	background-color: red;
+	font-size: 1.4rem;
+	font-weight: bold;
+	padding: .5rem 1rem;
+	text-decoration: none;
+	border: .1rem solid red;
+	border-radius: .5rem;
+	text-align: center;
+	transition: background-color .2s;
+}
+.main .sidebar .layerList .layer .zoomLayer:hover{
 	background-color: #cacaca;
+}
+.main .sidebar .layerList .layer .removeLayer:hover{
+	background-color: white;
+	color: red;
+}
+.main .sidebar .layerList .layerGroup select{
+	border-radius: .5rem;
+	border: 1px solid gray;
+	cursor: pointer;
+	overflow: scroll;
+	overflow-x: hidden;
+	width: 30%;
+	height: 10%;
+}
+.main .sidebar .layerList .layerGroup option{
+	max-height: 2rem;
+	overflow: scroll;
+	overflow-x: hidden;
+	margin-top: .5rem;
+	cursor: pointer;
+}
+.main .sidebar .layerList .layerGroup option:hover{
+	background-color: #ddd;
+}
+.main .sidebar .layerList .layerGroup select:hover{
+	border-color: #17232e;
+}
+.main .sidebar .layerList .layerGroup #pointsList{
+	position: relative;
+	top: .5rem;
+	left: 2rem;
+	padding: .3rem .5rem;
+	font-size: 1.2rem;
+	letter-spacing: .1rem;
+	font-weight: 500;
 }
 .main .sidebar .layerList .layerGroup .geom{
 	background-color: #e9b200;
